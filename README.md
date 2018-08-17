@@ -13,6 +13,12 @@ python Minesweeper.py
 ```
 Note: If you already have python 2 and 3 install you may have to run it like python2 Minesweeper.py or even py -2 Minesweeper.py
 
+## Running the tests
+On the same directory simply run:
+```
+python TestMinesweeper.py
+```
+
 ## License
 MIT-Look at [License](https://github.com/tf-venegas10/Minesweeper/blob/master/LICENSE) for more information
 
