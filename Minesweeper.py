@@ -92,11 +92,10 @@ def uncover(i, j, realBoard, shownBoard, tempMines):
         return False
     else:
         shownBoard.matrix[i][j] = "-"
-
+# recursive calls
         uncover(i + 1, j, realBoard, shownBoard, tempMines)
         uncover(i + 1, j - 1, realBoard, shownBoard, tempMines)
         uncover(i + 1, j + 1, realBoard, shownBoard, tempMines)
-
         uncover(i - 1, j, realBoard, shownBoard, tempMines)
         uncover(i - 1, j - 1, realBoard, shownBoard, tempMines)
         uncover(i - 1, j + 1, realBoard, shownBoard, tempMines)
@@ -104,9 +103,9 @@ def uncover(i, j, realBoard, shownBoard, tempMines):
         uncover(i, j - 1, realBoard, shownBoard, tempMines)
         return False
 
-
-def doAction(line, column, action,  realBoard, shownBoard, missingMines, setMines, tempMines, nMines):
-
+#This method is charged of doing the two possible actions
+def doAction(line, column, action, realBoard, shownBoard, missingMines, setMines, tempMines, nMines):
+    #Mark case
     if action == "M":
         if shownBoard.matrix[line][column] == "P":
             shownBoard.matrix[line][column] = "."
@@ -120,9 +119,11 @@ def doAction(line, column, action,  realBoard, shownBoard, missingMines, setMine
                 setMines += 1
                 if missingMines == 0 and setMines == nMines:
                     return (True, True, missingMines, setMines)
+    #Uncover case
     else:
-        return (uncover(line, column, realBoard, shownBoard, tempMines),False, missingMines,setMines)
-    return (False,False,missingMines,setMines)
+        return (uncover(line, column, realBoard, shownBoard, tempMines), False, missingMines, setMines)
+    return (False, False, missingMines, setMines)
+
 
 if __name__ == '__main__':
 
@@ -136,7 +137,8 @@ if __name__ == '__main__':
         while height <= 0 or width <= 0 or nMines <= 0 or nMines > height * width:
             print("We are going to play Minesweeper.")
             # Request initial input
-            print("Please enter the board s height, width, and number of mines you want separated by spaces (ex:'10 20 10')")
+            print(
+                "Please enter the board s height, width, and number of mines you want separated by spaces (ex:'10 20 10')")
             # read input
             line = raw_input()
             tempArr = line.split(" ")
@@ -176,7 +178,8 @@ if __name__ == '__main__':
                     print(
                         "You entered an INCORRECT value, this game is not that sophisticated please follow the guideline.")
                 entries += 1
-                print("Please enter the cell you want to modify separated by spaces in the form <line> <column> <action>")
+                print(
+                    "Please enter the cell you want to modify separated by spaces in the form <line> <column> <action>")
                 print("The possible actions are: M : mark or un-mark a cell, U : uncover a cell marked as '.' ")
                 inp = raw_input()
                 try:
@@ -185,7 +188,8 @@ if __name__ == '__main__':
                 except:
                     pass
 
-            gameOver,victory, missingMines, setMines=doAction(line, column, action,  realBoard, shownBoard, missingMines, setMines, tempMines, nMines)
+            gameOver, victory, missingMines, setMines = doAction(line, column, action, realBoard, shownBoard,
+                                                                 missingMines, setMines, tempMines, nMines)
 
         if victory:
             print(shownBoard.toString())
